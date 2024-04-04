@@ -42,11 +42,44 @@
               return options;
             },
             onEachFeature: function (feature, layer) {
+              /* Create array to hold months of the year */
+              var monthsOfTheYear = [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec",
+              ];
+
+              /* Retrieve and Parse the date from the feature */
+              var dateData = feature.properties.startdate;
+              var date = new Date(dateData);
+              var day = date.getDay();
+              var month = monthsOfTheYear[date.getMonth()];
+              var year = date.getFullYear();
+
+              /*  Display the fire name, stage of control, and start date. */
               var popupContent =
                 "<p>" +
-                "Size: " +
-                feature.properties.hectares +
+                "<b>Fire Name: </b>" +
+                feature.properties.firename +
                 "<br/>" +
+                "<b>Stage of Control: </b>" +
+                feature.properties.stage_of_control +
+                "<br/>" +
+                "<b>Fire Start Date: </b>" +
+                month +
+                " " +
+                day +
+                ", " +
+                year +
                 "</p>";
               layer.bindPopup(popupContent);
             },
