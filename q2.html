@@ -39,6 +39,18 @@
                 weight: 2,
                 fillOpacity: 0.5,
               };
+              /* Check every features hectares,
+                 If hectares are less than 1 or null -> point is transparent 
+                 If hectares are more than 1000 -> point is opaque */
+              if (
+                feature.properties.hectares < 1 ||
+                feature.properties.hectares == null
+              ) {
+                options.fillOpacity = 0;
+              }
+              if (feature.properties.hectares > 1000) {
+                options.fillOpacity = 1;
+              }
               return options;
             },
             onEachFeature: function (feature, layer) {
